@@ -36,7 +36,8 @@ int main(int argc,char **argv){
 
 		// Getting the RSA code to be cracked
 		printf("Enter tha RSA Code to be Cracked\n");
-		scanf("%d",&codeToBeCracked);						
+		scanf("%d",&codeToBeCracked);	
+		printf("Prime numbers Between 0 and %d\n",codeToBeCracked);					
 	}
 
 	// Synchronizing the processes before the broadcast
@@ -58,12 +59,19 @@ int main(int argc,char **argv){
 	}
 
 	else{
-		GetPrimesInGivenRange(inputsForOneProcess*currentProcessRank+1,inputsForOneProcess*(currentProcessRank+1));
+		if(currentProcessRank==(totalProcesses-1)){
+			GetPrimesInGivenRange(inputsForOneProcess*currentProcessRank+1,codeToBeCracked);
+		}
+
+		else{
+			GetPrimesInGivenRange(inputsForOneProcess*currentProcessRank+1,inputsForOneProcess*(currentProcessRank+1));
+		}
+		
 	}
 
 	MPI_Barrier(MPI_COMM_WORLD);
 
-	//printf("Total Processes %d Current Rank %d\n",totalProcesses,currentProcessRank);
+	
 	return 0;
 }
 
@@ -90,7 +98,7 @@ int GetPrimesInGivenRange(int lowerBound,int upperBound)
 		if(flag==0)
 		{
 			primeNumbersList.push_back(i);
-			printf("processId%d   %d\n",currentProcessRank,i);
+			printf("Counteed by Process %d   %d\n",currentProcessRank,i);
 		}
          
   	}
