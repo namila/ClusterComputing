@@ -76,7 +76,7 @@ int main(int argc,char **argv){
 }
 
 
-//Generating the prime Numbers in the given Range
+//Generating the prime Numbers in the given Range.
 
 int GetPrimesInGivenRange(int lowerBound,int upperBound)
 {
